@@ -1,42 +1,67 @@
 const mongoose = require('mongoose');
 
+/*
+
+a title
+a body (the code)
+optional notes
+a language
+tags -- that is, user-defined words or phrases that classify the code, like "authentication", "front-end", "middleware", or "database".
+
+*/
+
+
 const snippetSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String,
         required: true,
         unique: true
     },
-    prepTime: {
-        type: Number,
-        min: [1, 'Prep time must be greater than 0']
+    body: {
+        type: String,
+        required: true,
     },
-    cookTime: {
-        type: Number,
-        min: [1, 'Cook time must be greater than 0']
+    notes: {
+        type: String,
+        required: true,
     },
-    // cookMethod: {   type: String,   enum: ["oven", "microwave", "stovetop"] },
-    ingredients: [
-        {
-            amount: {
-                type: Number,
-                required: true,
-                default: 1
-            },
-            measure: {
-                type: String,
-                lowercase: true,
-                trim: true
-            },
-            ingredient: {
-                type: String,
-                required: true
-            }
-        }
-    ],
-    steps: [String],
-    source: {
+    language: {
+        type: String,
+        required: true,
+    },
+    tags: [String],
+    author: {
         type: String
     }
+
+    // prepTime: {
+    //     type: Number,
+    //     min: [1, 'Prep time must be greater than 0']
+    // },
+    // cookTime: {
+    //     type: Number,
+    //     min: [1, 'Cook time must be greater than 0']
+    // },
+    // cookMethod: {   type: String,   enum: ["oven", "microwave", "stovetop"] },
+    // ingredients: [
+    //     {
+    //         amount: {
+    //             type: Number,
+    //             required: true,
+    //             default: 1
+    //         },
+    //         measure: {
+    //             type: String,
+    //             lowercase: true,
+    //             trim: true
+    //         },
+    //         ingredient: {
+    //             type: String,
+    //             required: true
+    //         }
+    //     }
+    // ],
+
 })
 
 snippetSchema.methods.findSnippetsFromSameSource = function(callback) {
