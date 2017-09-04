@@ -92,11 +92,11 @@ router.post('/new_step/', function(req, res) {
     })
 })
 
-app.get('/new/', function(req, res) {
+router.get('/new/', function(req, res) {
     res.render('new_snippet');
 });
 
-app.post('/new/', function(req, res) {
+router.post('/new/', function(req, res) {
     Snippet.create(req.body).then(function(snippet) {
         res.redirect('/');
     }).catch(function(error) {
@@ -111,7 +111,7 @@ app.post('/new/', function(req, res) {
     })
 });
 
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
     Snippet.find().then(function(snippets) {
         res.render('index', {snippets: snippets});
     })
