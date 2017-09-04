@@ -24,10 +24,8 @@ app.set('view engine', 'mustache')
 app.set('layout', 'layout');
 
 app.use('/static', express.static('static'));
+app.use('',snippetRouter);
 
-// put routes here
-
-app.use('/:id', snippetRouter);
 module.exports = app;
 
 

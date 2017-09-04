@@ -19,6 +19,10 @@ const getSnippet = function(req, res, next) {
 router.use(getSnippet);
 
 router.get('/', function(req, res) {
+  res.render('index')
+})
+
+/*router.get('/', function(req, res) {
     const snippet = req.snippet;
     snippet.findSnippetsFromSameSource().then(function(otherSnippets) {
         res.render("snippet", {
@@ -26,7 +30,7 @@ router.get('/', function(req, res) {
             snippetsFromSameSource: otherSnippets
         });
     })
-})
+})*/
 
 router.get('/edit/', function(req, res) {
     const snippet = req.snippet;
