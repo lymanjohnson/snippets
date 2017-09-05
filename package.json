@@ -1,13 +1,19 @@
 {
   "private": true,
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "express-flash-messages": "^0.1.1",
+    "express-session": "^1.15.4",
+    "express-sessions": "^1.0.6",
     "express-validator": "^4.1.0",
     "mongoose": "^4.11.9",
     "mustache-express": "^1.2.5",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   },
   "scripts": {
     "start": "nodemon -e mustache,js server.js"
