@@ -159,6 +159,10 @@ recipeSchema.methods.getFormData = function() {
 const Recipe = mongoose.model('Recipe', recipeSchema);
 const User = mongoose.model('User', userSchema);
 
+/* FORMAT IS LIKE THIS:
+const ModelName = mongoose.model('SingularizedCapitalizedCollectionName',modelSchema);
+*/
+
 module.exports = {
     User: User,
     Recipe: Recipe

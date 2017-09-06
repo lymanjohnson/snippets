@@ -14,7 +14,7 @@ const fs = require('fs'),
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/snippetdb');
 
 app.engine('mustache', mustacheExpress());
 app.set('views', path.join(__dirname, 'views'));
@@ -169,20 +169,23 @@ const getRecipe = function(req, res, next) {
     })
 }
 
-app.get('/secret/', requireLogin, function (req, res) {
+app.use(requireLogin);
+
+app.get('/secret/', function (req, res) {
   res.render("secret");
 })
 
-app.use(getRecipe);
+// app.use(getRecipe);
 
-app.get('/', function(req, res) {
-    const recipe = req.recipe;
-    recipe.findRecipesFromSameSource().then(function(otherRecipes) {
-        res.render("recipe", {
-            recipe: recipe,
-            recipesFromSameSource: otherRecipes
-        });
-    })
+app.get('/rindex', function(req, res) {
+  res.send("rindex");
+    // const recipe = req.recipe;
+    // recipe.findRecipesFromSameSource().then(function(otherRecipes) {
+    //     res.render("recipe", {
+    //         recipe: recipe,
+    //         recipesFromSameSource: otherRecipes
+    //     });
+    // })
 })
 
 app.get('/edit/', function(req, res) {
@@ -248,9 +251,6 @@ app.post('/new_step/', function(req, res) {
         res.render("new_step", {recipe: recipe});
     })
 })
-
-
-
 
 app.listen(3000, function() {
     console.log('Express running on http://localhost:3000/.')
