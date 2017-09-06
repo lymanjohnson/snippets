@@ -160,13 +160,8 @@ app.get('/secret/', requireLogin, function (req, res) {
   res.render("secret");
 })
 
-app.get('/new/', requireLogin, function (req, res) {
-  res.render("new")
-})
 
-app.get('/snippet/', requireLogin, function (req, res) {
-  res.render("snippet")
-})
+
 
 app.listen(3000, function() {
     console.log('Express running on http://localhost:3000/.')
