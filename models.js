@@ -14,8 +14,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-
-
 userSchema.virtual('password')
     .get(function() {
         return null
@@ -44,7 +42,9 @@ userSchema.statics.authenticate = function(username, password, done) {
 };
 
 const User = mongoose.model('User', userSchema);
+const Snippet = mongoose.model('User', userSchema);
 
 module.exports = {
     User: User
+    Snippet: Snippet
 };
