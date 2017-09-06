@@ -173,6 +173,6 @@ const User = mongoose.model('User', userSchema);
 const Snippet = mongoose.model('User', userSchema);
 
 module.exports = {
-    User: User
+    User: User,
     Snippet: Snippet
 };
