@@ -4,9 +4,15 @@ const express = require('express');
 const mustacheExpress = require('mustache-express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
 const Snippet = require("./models/snippet");
 const snippetRouter = require("./routers/snippet");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+const models = require("./models/models");
+const flash = require('express-flash-messages'),
+const expressValidator = require('express-validator'),
+const User = models.User;
 
 const DUPLICATE_RECORD_ERROR = 11000;
 
