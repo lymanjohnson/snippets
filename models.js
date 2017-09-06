@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+
+
 userSchema.virtual('password')
     .get(function() {
         return null
