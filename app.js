@@ -169,23 +169,23 @@ const getRecipe = function(req, res, next) {
     })
 }
 
-app.use(requireLogin);
+// app.use(requireLogin);
 
-app.get('/secret/', function (req, res) {
+app.get('/secret/', requireLogin, function (req, res) {
   res.render("secret");
 })
 
 // app.use(getRecipe);
 
-app.get('/rindex', function(req, res) {
-  res.send("rindex");
-    // const recipe = req.recipe;
-    // recipe.findRecipesFromSameSource().then(function(otherRecipes) {
-    //     res.render("recipe", {
-    //         recipe: recipe,
-    //         recipesFromSameSource: otherRecipes
-    //     });
-    // })
+app.get('/rindex', getRecipe, function(req, res) {
+  // res.send("rindex");
+    const recipe = req.recipe;
+    recipe.findRecipesFromSameSource().then(function(otherRecipes) {
+        res.render("recipe", {
+            recipe: recipe,
+            recipesFromSameSource: otherRecipes
+        });
+    })
 })
 
 app.get('/edit/', function(req, res) {
