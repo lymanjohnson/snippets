@@ -41,6 +41,33 @@ userSchema.statics.authenticate = function(username, password, done) {
     })
 };
 
+const snippetSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  body: {
+    type: String,
+    required: true
+  },
+  notes: {
+    type: String,
+    required: true
+  },
+  language: {
+    type: String,
+    required: true
+  },
+  tags: [String],
+  author: {
+    type: String,
+    required: true
+  },
+  stars: [String] // list of usernames that starred it
+
+});
+
 const recipeSchema = new mongoose.Schema({
     name: {
         type: String,
