@@ -4,7 +4,9 @@ VIEWS:
 
   "many" - shows description of many snippets
 
-  "edit" - Editor for a snippet (doubles as a creator, also has a delete and cancel button)
+  "edit" - Editor for a snippet (has a cancel/delete button)
+
+  "create" - Creator. Has a cancel button.
 
   "login" - login screen
 
@@ -24,17 +26,19 @@ See list of all Users:
   /users/
   uses "users" view
 
-An Individual Snippet:
-  /snippets/id/:id
-  uses "one" view
+
 
 Create a snippet
-  /edit/
-  uses "edit" view
+  /create/
+  uses "create" view
 
 Edit a snippet
   /edit/:id
   uses "edit" view
+
+An Individual Snippet:
+  /snippets/id/:id
+  uses "one" view
 
 View all snippets with a certain tag
   /snippets/tag/:tag
@@ -42,7 +46,7 @@ View all snippets with a certain tag
 
 
 See all snippets by a certain user
-  /users/:username/
+  /snippets/user/:username/
   uses "many" view
 
 Default behavior ('/')
