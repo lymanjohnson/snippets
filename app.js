@@ -100,6 +100,7 @@ app.get('/register/', function(req, res) {
 
 app.post('/register/', function(req, res) {
     req.checkBody('username', 'Username must be alphanumeric').isAlphanumeric();
+    req.checkBody('username', 'Username must be lowercase').isLowercase();
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
 
@@ -171,13 +172,50 @@ const getRecipe = function(req, res, next) {
 
 // app.use(requireLogin);
 
+app.get('/users/', requireLogin, function (req, res) {
+  res.render("users"); //must show all users
+})
+
+app.get('/snippets/', requireLogin, function (req, res) {
+  res.render("many"); //must show all snippets
+})
+
+app.get('/snippets/tag/:tag', requireLogin, function (req, res) {
+  res.render("many"); //all that include tag
+})
+
+app.get('/snippets/language/:language', requireLogin, function (req, res) {
+  res.render("many"); //all that include language
+})
+
+app.get('/snippets/user/:username', requireLogin, function (req, res) {
+  res.render("many"); //all from a particular user
+})
+
+
+app.get('/snippets/id/:id', requireLogin, function (req, res) {
+  res.render("one"); //pass just _id
+})
+
+
+app.get('/create/', requireLogin, function (req, res) {
+  res.render("create");
+})
+
+app.get('/edit/:id', requireLogin, function (req, res) {
+  res.render("edit"); // pass _id to mustache
+})
+
+
+
+
 app.get('/secret/', requireLogin, function (req, res) {
   res.render("secret");
 })
 
-// app.use(getRecipe);
+app.use(getRecipe);
 
-app.get('/rindex', getRecipe, function(req, res) {
+app.get('/rindex', function(req, res) {
   // res.send("rindex");
     const recipe = req.recipe;
     recipe.findRecipesFromSameSource().then(function(otherRecipes) {
