@@ -62,18 +62,19 @@ mongoimport --db snippetdb --collection snippets --drop --jsonArray --file sampl
 
 TODOS:
 - use PUT instead of POST for update
-- delimit tags by ALL whitespace, not just a single space
+
 
 REQS:
-- allow you to create a snippet
 - allow you to see a list of all your snippets for a specific language
+- allow you to see a list of all your snippets for a specific tag
 
 DONE:
+- allow you to create a snippet
 - have registration and login
 - allow you to see a list of all your snippets
-- allow you to see a list of all your snippets for a specific tag
-- allow you to look at an individual snippet
 
+- allow you to look at an individual snippet
+- delimit tags by ALL whitespace, not just a single space
 
 CANCELED
 - have a comprehensive set of tests for all controllers and models
