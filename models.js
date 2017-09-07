@@ -71,6 +71,15 @@ const snippetSchema = new mongoose.Schema({
 
 });
 
+snippetSchema.methods.findSnippetsFromSameAuthor = function(callback) {
+    return this.model('Snippet').find({
+        author: this.author,
+        _id: {
+            $ne: this._id
+        }
+    }, callback);
+}
+
 const recipeSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -109,6 +118,7 @@ const recipeSchema = new mongoose.Schema({
         type: String
     }
 })
+
 
 recipeSchema.methods.findRecipesFromSameSource = function(callback) {
     return this.model('Recipe').find({
