@@ -63,16 +63,23 @@ mongoimport --db snippetdb --collection snippets --drop --jsonArray --file sampl
 TODOS:
 - use PUT instead of POST for update
 
-
 REQS:
-- allow you to see a list of all your snippets for a specific language
-- allow you to see a list of all your snippets for a specific tag
+
+
+REACH:
+- allow you to "star" or favorite other people's snippets [REACH]
+- allow you to sort snippets by date created or updated, and by number of stars [REACH]
 
 DONE:
+- allow you to see a list of all YOUR snippets for a specific language
+- allow you to see a list of all YOUR snippets for a specific tag
+- allow you to view all snippets site-wide for a specific tag [REACH]
+- allow you to view all snippets site-wide for a specific language [REACH]
+- allow you to view all snippets for another person [REACH]
+- allow you to view just your own snippets or others [REACH]
 - allow you to create a snippet
 - have registration and login
 - allow you to see a list of all your snippets
-
 - allow you to look at an individual snippet
 - delimit tags by ALL whitespace, not just a single space
 

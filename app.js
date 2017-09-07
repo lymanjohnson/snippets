@@ -197,11 +197,21 @@ app.get('/snippets/', requireLogin, function (req, res) {
 })
 
 app.get('/snippets/tag/:tag', requireLogin, function (req, res) {
-
+  Snippet.find({tags: req.params.tag}).then(function(snippet){
+    res.render("many",{snippet:snippet})
+  })
 })
 
+//   Snippet.find({ tags: { $elemMatch: req.params.tag } }).then(function(snippet){
+//     res.render("many",{snippet:snippet});
+//   }
+// })
+
+
 app.get('/snippets/language/:language', requireLogin, function (req, res) {
-  res.render("many"); //all that include language
+  Snippet.find({language : req.params.language}).then(function(snippet){
+    res.render("many",{snippet:snippet})
+  })
 })
 
 app.get('/snippets/user/:username', requireLogin, function (req, res) {
@@ -210,6 +220,17 @@ app.get('/snippets/user/:username', requireLogin, function (req, res) {
   })
 })
 
+app.get('/snippets/user/:username/tag/:tag', requireLogin, function (req, res) {
+  Snippet.find({author: req.params.username , tags: req.params.tag}).then(function(snippet) {
+    res.render("many",{snippet:snippet});
+  })
+})
+
+app.get('/snippets/user/:username/language/:language', requireLogin, function (req, res) {
+  Snippet.find({author: req.params.username , language: req.params.language}).then(function(snippet) {
+    res.render("many",{snippet:snippet});
+  })
+})
 
 app.get('/snippets/id/:id', requireLogin, function (req, res) {
   Snippet.findOne({_id : req.params.id}).then(function(snippet){
@@ -219,6 +240,10 @@ app.get('/snippets/id/:id', requireLogin, function (req, res) {
 
 app.get('/create/', requireLogin, function (req, res) {
   res.render("create");
+})
+
+app.put('/snippets/id/:id',requireLogin, function(req){
+
 })
 
 app.post('/create/', function (req, res) {
