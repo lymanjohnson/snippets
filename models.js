@@ -59,11 +59,14 @@ const snippetSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
   tags: [String],
+
   author: {
     type: String,
     required: true
   },
+  
   stars: [String] // list of usernames that starred it
 
 });
