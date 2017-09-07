@@ -70,6 +70,12 @@ const snippetSchema = new mongoose.Schema({
 
 });
 
+snippetSchema
+.virtual('numberOfStars')
+.get(function () {
+  return this.stars.length;
+});
+
 snippetSchema.methods.findSnippetsFromSameAuthor = function(callback) {
     return this.model('Snippet').find({
         author: this.author,

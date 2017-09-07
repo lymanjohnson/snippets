@@ -234,7 +234,7 @@ app.get('/snippets/user/:username/language/:language', requireLogin, function (r
 
 app.get('/snippets/id/:id', requireLogin, function (req, res) {
   Snippet.findOne({_id : req.params.id}).then(function(snippet){
-    res.render("one",{snippet:snippet})
+    res.render("one",{snippet:snippet , starred : snippet.stars.includes(res.locals.user.username)})
   })
 })
 

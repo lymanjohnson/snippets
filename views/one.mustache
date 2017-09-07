@@ -10,10 +10,20 @@ JUST ONE SNIPPET
 <p>language:{{language}}</p>
 <p>tags:{{tags}}</p>
 <p>stars:{{stars}}</p>
+<p>numberOfStars:{{numberOfStars}}</p>
 
+{{#starred}}
 <form action="/star/" method="POST">
-<button type="submit" name="id" value="{{id}}">STAR THIS</button>
+<button type="submit" name="id" value="{{id}}">LIKE THIS</button>
 </form>
+{{/starred}}
+
+{{^starred}}
+<form action="/star/" method="POST">
+<button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
+</form>
+{{/starred}}
+
 
 {{/snippet}}
 
