@@ -171,6 +171,13 @@ const getRecipe = function(req, res, next) {
     })
 }
 
+const getSnippet = function(req, res, next) {
+    Snippet.findOne({_id: req.params.id}).then(function(recipe) {
+        req.snippet = snippet;
+        next();
+    })
+}
+
 // app.use(requireLogin);
 
 app.get('/users/', requireLogin, function (req, res) {
@@ -184,7 +191,7 @@ app.get('/snippets/', requireLogin, function (req, res) {
 })
 
 app.get('/snippets/tag/:tag', requireLogin, function (req, res) {
-  res.render("many"); //all that include tag
+
 })
 
 app.get('/snippets/language/:language', requireLogin, function (req, res) {
@@ -192,7 +199,9 @@ app.get('/snippets/language/:language', requireLogin, function (req, res) {
 })
 
 app.get('/snippets/user/:username', requireLogin, function (req, res) {
-  res.render("many"); //all from a particular user
+  Snippet.find({author: req.params.username}).then(function(snippet) {
+    res.render("many",{snippet:snippet});
+  })
 })
 
 
@@ -208,9 +217,6 @@ app.get('/create/', requireLogin, function (req, res) {
 app.get('/edit/:id', requireLogin, function (req, res) {
   res.render("edit"); // pass _id to mustache
 })
-
-
-
 
 app.get('/secret/', requireLogin, function (req, res) {
   res.render("secret");
