@@ -65,13 +65,6 @@ TODOS:
 
 REQS:
 
-
-REACH:
-
-- allow you to sort snippets by date created or updated, and by number of stars [REACH]
-
-DONE:
-- allow you to "star" or favorite other people's snippets [REACH]
 - allow you to see a list of all YOUR snippets for a specific language
 - allow you to see a list of all YOUR snippets for a specific tag
 - allow you to view all snippets site-wide for a specific tag [REACH]
@@ -82,6 +75,14 @@ DONE:
 - have registration and login
 - allow you to see a list of all your snippets
 - allow you to look at an individual snippet
+
+
+REACH:
+
+- allow you to sort snippets by date created or updated, and by number of stars [REACH]
+
+DONE:
+- allow you to "star" or favorite other people's snippets [REACH]
 - delimit tags by ALL whitespace, not just a single space
 
 CANCELED

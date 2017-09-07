@@ -2,25 +2,27 @@ JUST ONE SNIPPET
 
 {{#snippet}}
 
-<p>title:{{title}}</p>
-<p>author:{{author}}</p>
-<p>body:{{body}}</p>
-<p>id:{{id}}</p>
-<p>notes:{{notes}}</p>
-<p>language:{{language}}</p>
-<p>tags:{{tags}}</p>
-<p>stars:{{stars}}</p>
+<h2>{{title}}</p>
+<a href="/snippets/user/{{author}}"><p>author:{{author}}</p></a>
+<div class="bodyText">{{body}}</div>
+<div class="notes">Notes: {{notes}}</p>
+<div class="language">Language:<a href="/snippets/language/{{language}}">{{language}}</a></div>
+TAGS:{{#tags}}
+  <div class = "tag"><a href="/snippets/tag/{{.}}">{{.}}</a></div>
+{{/tags}}
+{{numberOfStars}} People Like This:{{#stars}}
+<a href="/snippets/users/{{.}}/"><p>{{.}}</p></a>
+{{/stars}}
 <p>numberOfStars:{{numberOfStars}}</p>
-
 {{#starred}}
 <form action="/star/" method="POST">
-<button type="submit" name="id" value="{{id}}">LIKE THIS</button>
+<button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
 </form>
 {{/starred}}
 
 {{^starred}}
 <form action="/star/" method="POST">
-<button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
+<button type="submit" name="id" value="{{id}}">LIKE THIS</button>
 </form>
 {{/starred}}
 

@@ -2,15 +2,14 @@ MANY SNIPPETS
 
 {{#snippet}}
 
-<p>title:{{title}}</p>
-<p>author:{{author}}</p>
-<p>id:{{id}}</p>
-<p>_id:{{_id}}</p>
-<p>language:{{language}}</p>
-<p>tags:{{tags}}</p>
-<p>stars:{{stars}}</p>
-<p>numberOfStars:{{numberOfStars}}</p>
+<a href="/snippets/id/{{id}}"><p>title:{{title}}</p></a>
+<a href="/snippets/user/{{author}}"><p>author:{{author}}</p></a>
+<a href="/snippets/language/{{language}}"><p>language:{{language}}</p></a>
 
+TAGS:{{#tags}}
+  <a href="/snippets/tag/{{.}}"<p>{{.}}</p></a>
+{{/tags}}
+<p>numberOfStars:{{numberOfStars}}</p>
 {{/snippet}}
 
 {{^snippet}}
