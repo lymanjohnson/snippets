@@ -81,6 +81,9 @@ app.use(function (req, res, next) {
 
 app.get('/', function(req, res) {
     res.render("index");
+    console.log("req.user.username",req.user.username);
+    console.log("res.locals.user.username",res.locals.user.username);
+    // console.log("req.passport.user.username",req.passport.user.username); DOESN'T WORK
 })
 
 app.get('/login/', function(req, res) {
@@ -181,7 +184,9 @@ const getSnippet = function(req, res, next) {
 // app.use(requireLogin);
 
 app.get('/users/', requireLogin, function (req, res) {
-  res.render("users"); //must show all users
+  User.find().then(function(user) {
+    res.render("users",{user:user});
+  })
 })
 
 app.get('/snippets/', requireLogin, function (req, res) {
@@ -206,7 +211,9 @@ app.get('/snippets/user/:username', requireLogin, function (req, res) {
 
 
 app.get('/snippets/id/:id', requireLogin, function (req, res) {
-  res.render("one"); //pass just _id
+  Snippet.findOne({_id : req.params.id}).then(function(snippet){
+    res.render("many",{snippet:snippet})
+  })
 })
 
 
@@ -215,7 +222,17 @@ app.get('/create/', requireLogin, function (req, res) {
 })
 
 app.get('/edit/:id', requireLogin, function (req, res) {
-  res.render("edit"); // pass _id to mustache
+  Snippet.findOne({_id : req.params.id}).then(function(snippet){
+    if (req.user.username == snippet.username) {
+    res.render("edit",{snippet : snippet});
+    }
+
+    else {
+      res.redirect('/snippets/id/:id', {error:"That is not your snippet"})
+    }
+
+  })
+
 })
 
 app.get('/secret/', requireLogin, function (req, res) {
