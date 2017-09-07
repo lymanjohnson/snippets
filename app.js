@@ -10,10 +10,11 @@ const fs = require('fs'),
     flash = require('express-flash-messages'),
     mongoose = require('mongoose'),
     expressValidator = require('express-validator'),
-    User = models.User;
-    Snippet = models.Snippet;
+    User = models.User,
+    Snippet = models.Snippet,
     Recipe = models.Recipe; //delete this later
 
+const DUPLICATE_RECORD_ERROR = 11000;
 const app = express();
 
 mongoose.connect('mongodb://localhost/snippetdb');
@@ -221,19 +222,41 @@ app.get('/create/', requireLogin, function (req, res) {
   res.render("create");
 })
 
-app.get('/edit/:id', requireLogin, function (req, res) {
-  Snippet.findOne({_id : req.params.id}).then(function(snippet){
-    if (req.user.username == snippet.username) {
-    res.render("edit",{snippet : snippet});
+app.post('/create/', function (req, res) {
+  console.log(req.body);
+  req.body.author = res.locals.user.username;
+  tagArray = req.body.tagsRaw.split(" ");
+  let i =0
+  while (i<tagArray.length) {
+    if (tagArray[i] == ""){
+      tagArray.splice(i,1);
     }
+    else{i++}
+  }
 
-    else {
-      res.redirect('/snippets/id/:id', {error:"That is not your snippet"})
-    }
+  req.body.tags = tagArray;
 
-  })
-
+  Snippet.create(req.body)
+    .then(function (snippet) {
+      console.log(snippet);
+      res.redirect('/');
+    })
 })
+
+//EDIT DOESN'T WORK YET
+// app.get('/edit/:id', requireLogin, function (req, res) {
+//   Snippet.findOne({_id : req.params.id}).then(function(snippet){
+//     if (req.user.username == snippet.username) {
+//     res.render("edit",{snippet : snippet});
+//     }
+//
+//     else {
+//       res.redirect('/snippets/id/:id', {error:"That is not your snippet"})
+//     }
+//
+//   })
+//
+// })
 
 app.get('/secret/', requireLogin, function (req, res) {
   res.render("secret");
