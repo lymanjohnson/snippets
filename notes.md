@@ -44,10 +44,12 @@ View all snippets with a certain tag
   /snippets/tag/:tag
   uses "many" view
 
-
 See all snippets by a certain user
   /snippets/user/:username/
   uses "many" view
+
+See all snippets for a certain language
+  /snippets/language/:language/
 
 Default behavior ('/')
 If logged in, go straight to /snippets/

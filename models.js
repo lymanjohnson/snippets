@@ -118,6 +118,7 @@ recipeSchema.methods.findRecipesFromSameSource = function(callback) {
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 const User = mongoose.model('User', userSchema);
+const Snippet = mongoose.model('Snippet', snippetSchema);
 
 /* FORMAT IS LIKE THIS:
 const ModelName = mongoose.model('SingularizedCapitalizedCollectionName',modelSchema);
