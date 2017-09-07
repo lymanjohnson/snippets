@@ -242,8 +242,30 @@ app.get('/create/', requireLogin, function (req, res) {
   res.render("create");
 })
 
-app.put('/snippets/id/:id',requireLogin, function(req){
+app.post('/star/',requireLogin, function(req, res){
+  console.log(req.body.id);
+  Snippet.findOne({_id : req.body.id}).then(function(snippet){
+    // If the stars list already includes the user, it removes all instances from the stars list (there should be only one but this is bug proofing)
+    console.log(res.locals.user.username);
+    console.log(snippet.stars.includes(res.locals.user.username));
+    if(snippet.stars.includes(res.locals.user.username)){
+      i = 0;
+      while (i<snippet.stars.length){
+        console.log(i);
+        if (snippet.stars[i] == res.locals.user.username){
+          snippet.stars.splice(i,1);
+        }
+        else {i++}
+      }
+    }
+    // Otherwise, it adds the user to the stars list
+    else{
+      snippet.stars.push(res.locals.user.username);
+    }
 
+    snippet.save()
+    res.redirect(`/snippets/id/${req.body.id}/`)
+  })
 })
 
 app.post('/create/', function (req, res) {
