@@ -15,6 +15,7 @@
     "passport-local": "^1.0.0"
   },
   "scripts": {
-    "start": "nodemon -e mustache,js app.js"
+    "start": "nodemon -e mustache,js app.js",
+    "restart": "mongoimport --db snippetdb --collection snippets --drop --jsonArray --file sample-snippets.json"
   }
 }

@@ -11,6 +11,8 @@ const fs = require('fs'),
     mongoose = require('mongoose'),
     expressValidator = require('express-validator'),
     User = models.User;
+    Snippet = models.Snippet;
+    Recipe = models.Recipe; //delete this later
 
 const app = express();
 
@@ -52,7 +54,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(expressValidator());
-
 
 app.use(session({
     secret: 'keyboard cat',
@@ -177,7 +178,9 @@ app.get('/users/', requireLogin, function (req, res) {
 })
 
 app.get('/snippets/', requireLogin, function (req, res) {
-  res.render("many"); //must show all snippets
+  Snippet.find().then(function(snippet) {
+    res.render("many",{snippet:snippet});
+  })
 })
 
 app.get('/snippets/tag/:tag', requireLogin, function (req, res) {

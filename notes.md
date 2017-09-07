@@ -56,4 +56,9 @@ If logged in, go straight to /snippets/
 otherwise, go to /login/
 
 
+NOTES:
+to import sample data from json:
+mongoimport --db snippetdb --collection snippets --drop --jsonArray --file sample-snippets.json
+
 TODOS:
+use PUT instead of POST for update

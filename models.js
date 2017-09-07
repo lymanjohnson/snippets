@@ -66,7 +66,7 @@ const snippetSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  
+
   stars: [String] // list of usernames that starred it
 
 });
@@ -139,5 +139,6 @@ const ModelName = mongoose.model('SingularizedCapitalizedCollectionName',modelSc
 
 module.exports = {
     User: User,
-    Recipe: Recipe
+    Recipe: Recipe,
+    Snippet: Snippet
 };
