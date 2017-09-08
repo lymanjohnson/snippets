@@ -12,10 +12,8 @@ const fs = require('fs'),
   expressValidator = require('express-validator'),
   User = models.User,
   Snippet = models.Snippet,
-  Recipe = models.Recipe; //delete this later
-
-const DUPLICATE_RECORD_ERROR = 11000;
-const app = express();
+  DUPLICATE_RECORD_ERROR = 11000,
+  app = express();
 
 mongoose.connect('mongodb://localhost/snippetdb');
 
@@ -159,18 +157,9 @@ const requireLogin = function(req, res, next) {
   }
 }
 
-const getSnippet = function(req, res, next) {
-  Snippet.findOne({
-    _id: req.params.id
-  }).then(function(recipe) {
-    req.snippet = snippet;
-    next();
-  })
-}
+app.use(requireLogin);
 
-// app.use(requireLogin);
-
-app.get('/users/', requireLogin, function(req, res) {
+app.get('/users/', function(req, res) {
   Snippet.distinct("author").then(function(snippet) {
 
     res.render("users", {
@@ -180,7 +169,7 @@ app.get('/users/', requireLogin, function(req, res) {
   })
 })
 
-app.get('/tagsbyuser/:username', requireLogin, function(req, res) {
+app.get('/tagsbyuser/:username', function(req, res) {
   Snippet.find({
     author: req.params.username
   }).distinct("tags").then(function(snippet) {
@@ -191,7 +180,7 @@ app.get('/tagsbyuser/:username', requireLogin, function(req, res) {
   })
 })
 
-app.get('/languagesbyuser/:username', requireLogin, function(req, res) {
+app.get('/languagesbyuser/:username', function(req, res) {
   Snippet.find({
     author: req.params.username
   }).distinct("language").then(function(snippet) {
@@ -202,7 +191,7 @@ app.get('/languagesbyuser/:username', requireLogin, function(req, res) {
   })
 })
 
-app.get('/snippets/', requireLogin, function(req, res) {
+app.get('/snippets/', function(req, res) {
   Snippet.find().then(function(snippet) {
     res.render("many", {
       snippet: snippet
@@ -210,7 +199,7 @@ app.get('/snippets/', requireLogin, function(req, res) {
   })
 })
 
-app.get('/tags/', requireLogin, function(req, res) {
+app.get('/tags/', function(req, res) {
   Snippet.distinct("tags").then(function(snippet) {
     res.render("tags", {
       snippet: snippet
@@ -218,7 +207,7 @@ app.get('/tags/', requireLogin, function(req, res) {
   })
 })
 
-app.get('/languages/', requireLogin, function(req, res) {
+app.get('/languages/', function(req, res) {
   Snippet.distinct("language").then(function(snippet) {
     res.render("languages", {
       snippet: snippet
@@ -226,7 +215,7 @@ app.get('/languages/', requireLogin, function(req, res) {
   })
 })
 
-app.get('/snippets/tag/:tag', requireLogin, function(req, res) {
+app.get('/snippets/tag/:tag', function(req, res) {
   Snippet.find({
     tags: req.params.tag
   }).then(function(snippet) {
@@ -242,7 +231,7 @@ app.get('/snippets/tag/:tag', requireLogin, function(req, res) {
 // })
 
 
-app.get('/snippets/language/:language', requireLogin, function(req, res) {
+app.get('/snippets/language/:language', function(req, res) {
   Snippet.find({
     language: req.params.language
   }).then(function(snippet) {
@@ -252,7 +241,7 @@ app.get('/snippets/language/:language', requireLogin, function(req, res) {
   })
 })
 
-app.get('/snippets/user/:username', requireLogin, function(req, res) {
+app.get('/snippets/user/:username', function(req, res) {
   Snippet.find({
     author: req.params.username
   }).then(function(snippet) {
@@ -262,7 +251,7 @@ app.get('/snippets/user/:username', requireLogin, function(req, res) {
   })
 })
 
-app.get('/snippets/user/:username/tag/:tag', requireLogin, function(req, res) {
+app.get('/snippets/user/:username/tag/:tag', function(req, res) {
   Snippet.find({
     author: req.params.username,
     tags: req.params.tag
@@ -273,7 +262,7 @@ app.get('/snippets/user/:username/tag/:tag', requireLogin, function(req, res) {
   })
 })
 
-app.get('/snippets/user/:username/language/:language', requireLogin, function(req, res) {
+app.get('/snippets/user/:username/language/:language', function(req, res) {
   Snippet.find({
     author: req.params.username,
     language: req.params.language
@@ -284,7 +273,7 @@ app.get('/snippets/user/:username/language/:language', requireLogin, function(re
   })
 })
 
-app.get('/snippets/id/:id', requireLogin, function(req, res) {
+app.get('/snippets/id/:id', function(req, res) {
   Snippet.findOne({
     _id: req.params.id
   }).then(function(snippet) {
@@ -296,7 +285,7 @@ app.get('/snippets/id/:id', requireLogin, function(req, res) {
   })
 })
 
-app.get('/edit/:id', requireLogin, function(req, res) {
+app.get('/edit/:id', function(req, res) {
   Snippet.findOne({
     _id: req.params.id
   }).then(function(snippet) {
@@ -307,7 +296,7 @@ app.get('/edit/:id', requireLogin, function(req, res) {
   })
 })
 
-app.post('/edit/',requireLogin, function(req,res){
+app.post('/edit/', function(req,res){
 
   let tagArray = req.body.tagsRaw.split(" ");
   let i = 0
@@ -334,7 +323,7 @@ app.post('/edit/',requireLogin, function(req,res){
   )
 })
 
-app.post('/delete/', requireLogin, function(req,res) {
+app.post('/delete/', function(req,res) {
   Snippet.remove({
     _id: req.body.id
   }).then(
@@ -342,7 +331,7 @@ app.post('/delete/', requireLogin, function(req,res) {
   )
 })
 
-app.post('/star/', requireLogin, function(req, res) {
+app.post('/star/', function(req, res) {
   Snippet.findOne({
     _id: req.body.id
   }).then(function(snippet) {
@@ -369,7 +358,7 @@ app.post('/star/', requireLogin, function(req, res) {
 
 
 
-app.get('/create/', requireLogin, function(req, res) {
+app.get('/create/', function(req, res) {
   res.render("create");
 })
 
@@ -389,7 +378,7 @@ app.post('/create/', function(req, res) {
 
   Snippet.create(req.body)
     .then(function(snippet) {
-      res.redirect('/');
+      res.redirect(`/snippets/user/${req.body.author}`);
     })
 })
 
