@@ -1,10 +1,15 @@
-
 <div class="container">
-{{#snippet}}
-<a href="/snippets/user/{{.}}"><div class="snippet">{{.}}</div></a>
-{{/snippet}}
+  <h3>Languages Used by {{username}}</h3>
 
-{{^snippet}}
-No user loaded
-{{/snippet}}
-</container>
+  {{#snippet}}
+    <div class="snippet">
+      <h2>"{{.}}"</h2>
+      <h4>Snippets in this Language:</h4>
+      <a href="/snippets/user/{{username}}/language/{{.}}">... by {{username}}</a><br>
+      <a href="/snippets/language/{{.}}">... by Everyone</a>
+    </div>
+  {{/snippet}}
+
+  {{^snippet}} No tags
+  {{/snippet}}
+</div>

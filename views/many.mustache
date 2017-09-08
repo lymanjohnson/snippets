@@ -1,26 +1,28 @@
 <div class="container">
-{{#snippet}}{{snippet}}
-<div class="snippet">
-<h2><a href="/snippets/id/{{id}}">{{title}}</a></h2>
-<dl>
-  <dt>Author</dt>
-  <dd><a href="/snippets/user/{{author}}">{{author}}</a></dd>
+  {{#snippet}}
+    <div class="snippet">
+      <h2><a href="/snippets/id/{{id}}">{{title}}</a></h2>
+      <dl>
+        <dt>Author</dt>
+        <dd><a href="/snippets/user/{{author}}">{{author}}</a></dd>
 
-  <dt>Language</dt>
-  <dd><a href="/snippets/language/{{language}}">{{language}}</a></dd>
+        <dt>Language</dt>
+        <dd><a href="/snippets/language/{{language}}">{{language}}</a></dd>
 
-  <dt>Tags</dt>
-  <dd>{{#tags}}
-  <a href="/snippets/tag/{{.}}">{{.}}</a>
-  {{/tags}}</dd>
+        <dt>Tags</dt>
+        <dd>
+          {{#tags}}
+            <a href="/snippets/tag/{{.}}">{{.}}</a>
+          {{/tags}}
+        </dd>
 
-  {{numberOfStars}} People Like This
+        {{numberOfStars}} People Like This
 
-</dl>
-</div>
-{{/snippet}}
+      </dl>
+    </div>
+  {{/snippet}}
 
-{{^snippet}}
-<h2>No snippets match this criteria</h2>
-{{/snippet}}
+  {{^snippet}}
+  <h2>No snippets match this criteria</h2>
+  {{/snippet}}
 </div>

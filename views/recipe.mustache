@@ -1,78 +1,76 @@
 {{#recipe}}
-<div class="recipe">
-  <h2>{{name}}</h2>
-  <p>
-    <a href="/{{_id}}/edit/">Edit recipe</a> |
-    <a href="/">Back to recipe list</a>
-  </p>
-  <dl>
-  {{#source}}
-  <dt>
+  <div class="recipe">
+    <h2>{{name}}</h2>
+    <p>
+      <a href="/{{_id}}/edit/">Edit recipe</a> |
+      <a href="/">Back to recipe list</a>
+    </p>
+    <dl>
+      {{#source}}
+      <dt>
     Source
   </dt>
-  <dd>
-    {{.}}
-  </dd>
-  {{/source}}
-  {{#prepTime}}
-  <dt>
+      <dd>
+        {{.}}
+      </dd>
+      {{/source}}
+      {{#prepTime}}
+        <dt>
     Prep time
   </dt>
-  <dd>
-    {{.}}
-  </dd>
-  {{/prepTime}}
-  {{#cookTime}}
-  <dt>
+        <dd>
+          {{.}}
+        </dd>
+      {{/prepTime}}
+      {{#cookTime}}
+        <dt>
     Cook time
   </dt>
-  <dd>
-    {{.}}
-  </dd>
-  {{/cookTime}}
-  </dl>
+        <dd>
+          {{.}}
+        </dd>
+      {{/cookTime}}
+    </dl>
 
-  <h3>Ingredients</h3>
-  {{^ingredients}}
-  <p>
-    You do not have any ingredients.
-  </p>
-  {{/ingredients}}
-  <ul>
-  {{#ingredients}}
-    <li>
-      {{amount}} {{measure}} {{ingredient}}
-    </li>
-  {{/ingredients}}
-  </ul>
-  <p>
-    <a href="/{{_id}}/new_ingredient/" class="button">Add an ingredient</a>
-  </p>
+    <h3>Ingredients</h3> {{^ingredients}}
+    <p>
+      You do not have any ingredients.
+    </p>
+    {{/ingredients}}
+    <ul>
+      {{#ingredients}}
+        <li>
+          {{amount}} {{measure}} {{ingredient}}
+        </li>
+      {{/ingredients}}
+    </ul>
+    <p>
+      <a href="/{{_id}}/new_ingredient/" class="button">Add an ingredient</a>
+    </p>
 
-  <h3>Steps</h3>
-  {{^steps}}
-  <p>
-    You do not have any steps.
-  </p>
-  {{/steps}}
-  <ol>
-  {{#steps}}
-    <li>
-      {{.}}
-    </li>
-  {{/steps}}
-</ol>
-  <p>
-    <a href="/{{_id}}/new_step/" class="button">Add a step</a>
-  </p>
-</div>
+    <h3>Steps</h3> {{^steps}}
+    <p>
+      You do not have any steps.
+    </p>
+    {{/steps}}
+    <ol>
+      {{#steps}}
+        <li>
+          {{.}}
+        </li>
+      {{/steps}}
+    </ol>
+    <p>
+      <a href="/{{_id}}/new_step/" class="button">Add a step</a>
+    </p>
+  </div>
 {{/recipe}}
 
 <h3>Other recipes from this source</h3>
 <ul>
-{{#recipesFromSameSource}}
-  <li>
-    <a href="/{{_id}}/">{{name}}</a>
-  </li>
-{{/recipesFromSameSource}}
+  {{#recipesFromSameSource}}
+    <li>
+      <a href="/{{_id}}/">{{name}}</a>
+    </li>
+  {{/recipesFromSameSource}}
 </ul>

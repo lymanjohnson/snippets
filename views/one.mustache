@@ -1,47 +1,50 @@
-
 <div class="container">
-{{#snippet}}
-<div class="snippet">
-<h2><a href="/snippets/id/{{id}}">{{title}}</a></h2>
-<dl>
-  <dt>Author</dt>
-  <dd><a href="/snippets/user/{{author}}">{{author}}</a></dd>
+  {{#snippet}}
+    <div class="snippet">
+      <h2><a href="/snippets/id/{{id}}">{{title}}</a></h2>
+      <dl>
+        <dt>Author</dt>
+        <dd><a href="/snippets/user/{{author}}">{{author}}</a></dd>
 
-  <dt>Language</dt>
-  <dd><a href="/snippets/language/{{language}}">{{language}}</a></dd>
+        <dt>Language</dt>
+        <dd><a href="/snippets/language/{{language}}">{{language}}</a></dd>
 
-  <dt>Body</dt>
-  <dd><pre class="bodyText">{{body}}</pre></dd>
+        <dt>Body</dt>
+        <dd><pre class="bodyText">{{body}}</pre></dd>
 
-  <dt>Notes</dt>
-  <dd>{{notes}}</dd>
+        <dt>Notes</dt>
+        <dd>{{notes}}</dd>
 
-  <dt>Tags</dt>
-  <dd>{{#tags}}
-  <a href="/snippets/tag/{{.}}">{{.}}</a>,
-  {{/tags}}</dd>
+        <dt>Tags</dt>
+        <dd>
+          {{#tags}}
+            <a href="/snippets/tag/{{.}}">{{.}}</a>,
+          {{/tags}}
+        </dd>
 
-  <dt>{{numberOfStars}} People Like This</dt>
-  <dd>{{#stars}}
-  <a href="/snippets/user/{{.}}">{{.}}</a>,
-  {{/stars}}</dd>
+        <dt>{{numberOfStars}} People Like This</dt>
+        <dd>
+          {{#stars}}
+            <a href="/snippets/user/{{.}}">{{.}}</a>,
+          {{/stars}}
+        </dd>
 
-  {{#starred}}
-  <form action="/star/" method="POST">
-  <button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
-  </form>
-  {{/starred}}
+        {{#starred}}
+          <form action="/star/" method="POST">
+            <button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
+          </form>
+        {{/starred}}
 
-  {{^starred}}
-  <form action="/star/" method="POST">
-  <button type="submit" name="id" value="{{id}}">LIKE THIS</button>
-  </form>
-  {{/starred}}
-</dl>
-</div>
-{{/snippet}}
+        {{^starred}}
+        <form action="/star/" method="POST">
+          <button type="submit" name="id" value="{{id}}">LIKE THIS</button>
+        </form>
+        {{/starred}}
+      </dl>
+    </div>
+  {{/snippet}}
 
-{{^snippet}}
-<h2>No snippets match this criteria</h2>
-{{/snippet}}
+  {{^snippet}}
+  <h2>No snippets match this criteria</h2>
+  {{/snippet}}
 </div>

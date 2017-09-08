@@ -1,17 +1,15 @@
-
 <div class="container">
   <h3>Tags Used by {{username}}</h3>
 
-{{#snippet}}
-<div class="container">
-  <h2>"{{.}}"</h2>
-  <h4>Snippets with this Tag:</h4>
-<a href="/snippets/user/{{username}}/tag/{{.}}">... by {{username}}</a><br>
-<a href="/snippets/tag/{{.}}">... by Everyone</a>
-</div>
-{{/snippet}}
+  {{#snippet}}
+    <div class="snippet">
+      <h2>"{{.}}"</h2>
+      <h4>Snippets with this Tag:</h4>
+      <a href="/snippets/user/{{username}}/tag/{{.}}">... by {{username}}</a><br>
+      <a href="/snippets/tag/{{.}}">... by Everyone</a>
+    </div>
+  {{/snippet}}
 
-{{^snippet}}
-No tags
-{{/snippet}}
+  {{^snippet}} No tags
+  {{/snippet}}
 </div>

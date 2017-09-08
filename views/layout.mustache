@@ -6,18 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Snippet Sorter</title>
   <link rel="stylesheet" href="/static/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 
 <body class="body">
   {{#user}}
-  <a href="/">Home</a> |
-  <a href="/create/">Add Snippet</a> |
-  <a href="/snippets/">All Snippets</a> |
-  <a href="/users/">All Users</a> |
-  <a href="/snippets/user/{{username}}">All My Snippets</a> |
-  <a href="/logout/">Logout</a>
+    <div class="header"><a href="/">Home</a> |
+      <a href="/create/">Add Snippet</a> |
+      <a href="/snippets/">All Snippets</a> |
+      <a href="/users/">All Users</a><br>
+      <a href="/snippets/user/{{username}}">My Snippets</a> |
+      <a href="/tagsbyuser/{{username}}">My Tags</a> |
+      <a href="/languagesbyuser/{{username}}">My Languages</a> |
+
+      <a href="/logout/">Logout</a>
+    </div>
   {{/user}}
 
   {{{yield}}}
