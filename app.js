@@ -327,7 +327,7 @@ app.post('/delete/', function(req,res) {
   Snippet.remove({
     _id: req.body.id
   }).then(
-    res.redirect('/')
+    res.redirect(`/snippets/user/${res.locals.user.username}`)
   )
 })
 
