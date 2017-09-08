@@ -1,34 +1,48 @@
-JUST ONE SNIPPET
+<h2>JUST ONE SNIPPET</h2>
 
-<!-- {{#snippet}}
+<div class="container">
+{{#snippet}}
+<div class="snippet">
+<h2><a href="/snippets/id/{{id}}">{{title}}</a></h2>
+<dl>
+  <dt>Author</dt>
+  <dd><a href="/snippets/user/{{author}}">{{author}}</a></dd>
 
-<h2>{{title}}</p>
-<a href="/snippets/user/{{author}}"><p>author:{{author}}</p></a>
-<div class="bodyText">{{body}}</div>
-<div class="notes">Notes: {{notes}}</p>
-<div class="language">Language:<a href="/snippets/language/{{language}}">{{language}}</a></div>
-TAGS:{{#tags}}
-  <div class = "tag"><a href="/snippets/tag/{{.}}">{{.}}</a></div>
-{{/tags}}
-{{numberOfStars}} People Like This:{{#stars}}
-<a href="/snippets/users/{{.}}/"><p>{{.}}</p></a>
-{{/stars}}
-<p>numberOfStars:{{numberOfStars}}</p>
-{{#starred}}
-<form action="/star/" method="POST">
-<button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
-</form>
-{{/starred}}
+  <dt>Language</dt>
+  <dd><a href="/snippets/language/{{language}}">{{language}}</a></dd>
 
-{{^starred}}
-<form action="/star/" method="POST">
-<button type="submit" name="id" value="{{id}}">LIKE THIS</button>
-</form>
-{{/starred}}
+  <dt>Body</dt>
+  <dd>{{body}}</dd>
 
+  <dt>Notes</dt>
+  <dd>{{notes}}</dd>
 
+  <dt>Tags</dt>
+  <dd>{{#tags}}
+  <a href="/snippets/tag/{{.}}">{{.}}</a>,
+  {{/tags}}</dd>
+
+  <dt>{{numberOfStars}} People Like This</dt>
+  <dd>{{#stars}}
+  <a href="/snippets/user/{{.}}">{{.}}</a>,
+  {{/stars}}</dd>
+
+  {{#starred}}
+  <form action="/star/" method="POST">
+  <button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
+  </form>
+  {{/starred}}
+
+  {{^starred}}
+  <form action="/star/" method="POST">
+  <button type="submit" name="id" value="{{id}}">LIKE THIS</button>
+  </form>
+  {{/starred}}
+</dl>
+</div>
 {{/snippet}}
 
 {{^snippet}}
-No snippet loaded
-{{/snippet}} -->
+<h2>No snippets match this criteria</h2>
+{{/snippet}}
+</div>

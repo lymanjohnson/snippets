@@ -1,5 +1,5 @@
-MANY SNIPPETS
-
+<h2>MANY SNIPPETS</h2>
+<div class="container">
 {{#snippet}}
 <div class="snippet">
 <h2><a href="/snippets/id/{{id}}">{{title}}</a></h2>
@@ -11,63 +11,17 @@ MANY SNIPPETS
   <dd><a href="/snippets/language/{{language}}">{{language}}</a></dd>
 
   <dt>Tags</dt>
-  {{#tags}}
-  <dd><a href="/snippets/tag/{{.}}">{{.}}</a></dd>
-  {{/tags}}
+  <dd>{{#tags}}
+  <a href="/snippets/tag/{{.}}">{{.}}</a>
+  {{/tags}}</dd>
 
   {{numberOfStars}} People Like This
-  {{#starred}}
-  <form action="/star/" method="POST">
-  <button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
-  </form>
-  {{/starred}}
 
-  {{^starred}}
-  <form action="/star/" method="POST">
-  <button type="submit" name="id" value="{{id}}">LIKE THIS</button>
-  </form>
-  {{/starred}}
 </dl>
 </div>
 {{/snippet}}
 
 {{^snippet}}
-No snippet loaded
+<h2>No snippets match this criteria</h2>
 {{/snippet}}
-
-
-<!-- {{#recipes}}
-  <div class="recipe">
-  <h2>
-    <a href="/{{_id}}">
-      {{name}}
-    </a>
-  </h2>
-  <dl>
-  {{#source}}
-  <dt>
-    Source
-  </dt>
-  <dd>
-    {{.}}
-  </dd>
-  {{/source}}
-  {{#prepTime}}
-  <dt>
-    Prep time
-  </dt>
-  <dd>
-    {{.}}
-  </dd>
-  {{/prepTime}}
-  {{#cookTime}}
-  <dt>
-    Cook time
-  </dt>
-  <dd>
-    {{.}}
-  </dd>
-  {{/cookTime}}
-  </dl>
-  </div>
-{{/recipes}} -->
+</div>
