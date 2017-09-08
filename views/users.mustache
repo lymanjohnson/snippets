@@ -1,10 +1,10 @@
-<h2>MANY USERS</h2>
 
+<div class="container">
+{{#otherUser}}
+<a href="/snippets/user/{{username}}"><div class="snippet">{{username}}</div></a>
+{{/otherUser}}
 
-{{#user}}
-<a href="/snippets/user/{{username}}"><p>{{username}}</p></a>
-{{/user}}
-
-{{^user}}
+{{^otherUser}}
 No user loaded
-{{/user}}
+{{/otherUser}}
+</container>

@@ -82,8 +82,8 @@ app.use(function (req, res, next) {
 
 app.get('/', function(req, res) {
     res.render("index");
-    console.log("req.user.username",req.user.username);
-    console.log("res.locals.user.username",res.locals.user.username);
+    // console.log("req.user.username",req.user.username);
+    // console.log("res.locals.user.username",res.locals.user.username);
     // console.log("req.passport.user.username",req.passport.user.username); DOESN'T WORK
 })
 
@@ -102,6 +102,27 @@ app.post('/login/', passport.authenticate('local', {
 app.get('/register/', function(req, res) {
     res.render('register');
 });
+
+
+app.post('/registerAll/', function(req,res) {
+  Snippet.find().then(function(snippet) {
+    const user = new User({
+        username: snippet.author,
+        password: "password"
+    })
+
+    // user.save(function(err) {
+    //     if (err) {
+    //         return res.render("register", {
+    //             messages: {
+    //                 error: ["That username is already taken."]
+    //             }
+    //         })
+    //     }
+    //     return res.redirect('/');
+    // })
+  })
+})
 
 app.post('/register/', function(req, res) {
     req.checkBody('username', 'Username must be alphanumeric').isAlphanumeric();
@@ -162,19 +183,6 @@ const requireLogin = function (req, res, next) {
   }
 }
 
-const addIndexToIngredients = function(recipe) {
-    for (let idx = 0; idx < recipe.ingredients.length; idx++) {
-        recipe.ingredients[idx].index = idx;
-    }
-}
-
-const getRecipe = function(req, res, next) {
-    Recipe.findOne({_id: req.params.id}).then(function(recipe) {
-        req.recipe = recipe;
-        next();
-    })
-}
-
 const getSnippet = function(req, res, next) {
     Snippet.findOne({_id: req.params.id}).then(function(recipe) {
         req.snippet = snippet;
@@ -186,7 +194,7 @@ const getSnippet = function(req, res, next) {
 
 app.get('/users/', requireLogin, function (req, res) {
   User.find().then(function(user) {
-    res.render("users",{user:user});
+    res.render("users",{otherUser:user}); // different key "otherUser" needed here to avoid conflict with header bar reference to current logged in "user"
   })
 })
 
