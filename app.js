@@ -82,9 +82,6 @@ app.use(function(req, res, next) {
 
 app.get('/', function(req, res) {
   res.render("index");
-  // console.log("req.user.username",req.user.username);
-  // console.log("res.locals.user.username",res.locals.user.username);
-  // console.log("req.passport.user.username",req.passport.user.username); DOESN'T WORK
 })
 
 app.get('/login/', function(req, res) {
@@ -310,6 +307,33 @@ app.get('/edit/:id', requireLogin, function(req, res) {
   })
 })
 
+app.post('/edit/',requireLogin, function(req,res){
+
+  let tagArray = req.body.tagsRaw.split(" ");
+  let i = 0
+  while (i < tagArray.length) {
+    if (tagArray[i] == "") {
+      tagArray.splice(i, 1);
+    } else {
+      i++
+    }
+  }
+
+  req.body.tags = tagArray;
+  Snippet.findOneAndUpdate(
+
+    {_id: req.body.id},
+    {title : req.body.title,
+     body  : req.body.body,
+     notes : req.body.notes,
+     language : req.body.language,
+     tags : tagArray
+    }
+  ).then(
+    res.redirect(`/snippets/id/${req.body.id}`)
+  )
+})
+
 app.post('/delete/', requireLogin, function(req,res) {
   Snippet.remove({
     _id: req.body.id
@@ -319,17 +343,13 @@ app.post('/delete/', requireLogin, function(req,res) {
 })
 
 app.post('/star/', requireLogin, function(req, res) {
-  console.log(req.body.id);
   Snippet.findOne({
     _id: req.body.id
   }).then(function(snippet) {
     // If the stars list already includes the user, it removes all instances from the stars list (there should be only one but this is bug proofing)
-    console.log(res.locals.user.username);
-    console.log(snippet.stars.includes(res.locals.user.username));
     if (snippet.stars.includes(res.locals.user.username)) {
       i = 0;
       while (i < snippet.stars.length) {
-        console.log(i);
         if (snippet.stars[i] == res.locals.user.username) {
           snippet.stars.splice(i, 1);
         } else {
@@ -354,7 +374,6 @@ app.get('/create/', requireLogin, function(req, res) {
 })
 
 app.post('/create/', function(req, res) {
-  console.log(req.body);
   req.body.author = res.locals.user.username;
   tagArray = req.body.tagsRaw.split(" ");
   let i = 0
@@ -370,7 +389,6 @@ app.post('/create/', function(req, res) {
 
   Snippet.create(req.body)
     .then(function(snippet) {
-      console.log(snippet);
       res.redirect('/');
     })
 })

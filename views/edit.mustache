@@ -3,10 +3,10 @@
     {{.}}
   </div>
 {{/errorMsg}}
-{{#snippet}}
+{{#mine}}{{#snippet}}
 <div class="container">
   <h2>Edit Snippet</h2>
-  <form action="/confirmedit/" method="POST">
+  <form action="/edit/" method="POST">
     <label for="title">Title:</label>
     <pre><input type="text" id="title" name="title" value="{{title}}" required></input></pre>
 
@@ -23,10 +23,10 @@
     <pre><input type="text" id="tagsRaw" name="tagsRaw" value="{{#tags}}{{.}} {{/tags}}">
     </input></pre>
 
-    <button type="submit">Edit Snippet</button>
+    <button type="submit" name="id" value="{{id}}">Confirm Edit</button>
   </form>
 </div>
-{{/snippet}}
+{{/snippet}}{{/mine}}
 {{^mine}}
-You cannot edit someone else's snippet!
+<div class="container"><h2>You cannot edit someone else's snippet!</h2></div>
 {{/mine}}
