@@ -76,7 +76,6 @@ REQS:
 - allow you to see a list of all your snippets
 - allow you to look at an individual snippet
 
-
 REACH:
 
 - allow you to sort snippets by date created or updated, and by number of stars [REACH]
