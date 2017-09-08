@@ -293,9 +293,18 @@ app.get('/snippets/id/:id', requireLogin, function(req, res) {
   }).then(function(snippet) {
     res.render("one", {
       snippet: snippet,
-      starred: snippet.stars.includes(res.locals.user.username)
+      starred: snippet.stars.includes(res.locals.user.username),
+      mine: (snippet.author == res.locals.user.username)
     })
   })
+})
+
+app.post('/delete/', requireLogin, function(req,res) {
+  Snippet.remove({
+    _id: req.body.id
+  }).then(
+    res.redirect('/')
+  )
 })
 
 app.get('/create/', requireLogin, function(req, res) {

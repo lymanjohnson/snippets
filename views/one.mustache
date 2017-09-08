@@ -29,6 +29,16 @@
           {{/stars}}
         </dd>
 
+        {{#mine}}
+          <form action="/delete/" method="POST">
+            <button type="submit" name="id" value="{{id}}">DELETE SNIPPET</button>
+          </form>
+          <form action="/edit/" method="POST">
+            <button type="submit" name="id" value="{{id}}">EDIT SNIPPET</button>
+          </form>
+        {{/mine}}
+
+
         {{#starred}}
           <form action="/star/" method="POST">
             <button type="submit" name="id" value="{{id}}">UNLIKE THIS</button>
