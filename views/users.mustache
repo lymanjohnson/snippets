@@ -1,10 +1,10 @@
 
 <div class="container">
-{{#otherUser}}
-<a href="/snippets/user/{{username}}"><div class="snippet">{{username}}</div></a>
-{{/otherUser}}
+{{#snippet}}
+<a href="/snippets/user/{{.}}"><div class="snippet">{{.}}</div></a>
+{{/snippet}}
 
-{{^otherUser}}
+{{^snippet}}
 No user loaded
-{{/otherUser}}
+{{/snippet}}
 </container>

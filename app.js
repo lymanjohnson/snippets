@@ -103,27 +103,6 @@ app.get('/register/', function(req, res) {
     res.render('register');
 });
 
-
-app.post('/registerAll/', function(req,res) {
-  Snippet.find().then(function(snippet) {
-    const user = new User({
-        username: snippet.author,
-        password: "password"
-    })
-
-    // user.save(function(err) {
-    //     if (err) {
-    //         return res.render("register", {
-    //             messages: {
-    //                 error: ["That username is already taken."]
-    //             }
-    //         })
-    //     }
-    //     return res.redirect('/');
-    // })
-  })
-})
-
 app.post('/register/', function(req, res) {
     req.checkBody('username', 'Username must be alphanumeric').isAlphanumeric();
     req.checkBody('username', 'Username must be lowercase').isLowercase();
@@ -193,8 +172,13 @@ const getSnippet = function(req, res, next) {
 // app.use(requireLogin);
 
 app.get('/users/', requireLogin, function (req, res) {
-  User.find().then(function(user) {
-    res.render("users",{otherUser:user}); // different key "otherUser" needed here to avoid conflict with header bar reference to current logged in "user"
+  Snippet.distinct("author").then(function(snippet) {
+    
+    res.render("users",{snippet:snippet})
+
+  // User.find().then(function(user) {
+    // res.render("users",{otherUser:user}); // different key "otherUser" needed here to avoid conflict with header bar reference to current logged in "user"
+
   })
 })
 
