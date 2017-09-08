@@ -1,10 +1,13 @@
 
 <div class="container">
 {{#snippet}}
-<a href="/snippets/user/{{.}}"><div class="snippet">{{.}}</div></a>
+<div class="snippet"><h3><a href="/snippets/user/{{.}}">{{.}}</a></h3>
+<a href="/tagsbyuser/{{.}}/">Tags by this User </a> |
+<a href="/languagesbyuser/{{.}}/">Languages by this User</a>
+</div>
 {{/snippet}}
 
 {{^snippet}}
 No user loaded
 {{/snippet}}
-</container>
+</div>

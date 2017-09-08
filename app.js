@@ -173,12 +173,24 @@ const getSnippet = function(req, res, next) {
 
 app.get('/users/', requireLogin, function (req, res) {
   Snippet.distinct("author").then(function(snippet) {
-    
+
     res.render("users",{snippet:snippet})
 
   // User.find().then(function(user) {
     // res.render("users",{otherUser:user}); // different key "otherUser" needed here to avoid conflict with header bar reference to current logged in "user"
 
+  })
+})
+
+app.get('/tagsbyuser/:username',requireLogin,function(req,res) {
+  Snippet.find({author:req.params.username}).distinct("tags").then(function(snippet){
+    res.render("tags",{snippet:snippet,username:req.params.username})
+  })
+})
+
+app.get('/languagesbyuser/:username',requireLogin,function(req,res) {
+  Snippet.find({author:req.params.username}).distinct("languages").then(function(snippet){
+    res.render("users",{snippet:snippet})
   })
 })
 
