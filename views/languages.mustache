@@ -1,0 +1,10 @@
+<div class="container">
+  {{#snippet}}
+    <div class="snippet">
+      <h3><a href="/snippets/language/{{.}}">{{.}}</a></h3>
+    </div>
+  {{/snippet}}
+
+  {{^snippet}} No user loaded
+  {{/snippet}}
+</div>

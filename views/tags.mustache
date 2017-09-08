@@ -1,0 +1,10 @@
+<div class="container">
+  {{#snippet}}
+    <div class="snippet">
+      <h3><a href="/snippets/tag/{{.}}">{{.}}</a></h3>
+    </div>
+  {{/snippet}}
+
+  {{^snippet}} No user loaded
+  {{/snippet}}
+</div>

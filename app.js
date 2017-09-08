@@ -180,9 +180,6 @@ app.get('/users/', requireLogin, function(req, res) {
       snippet: snippet
     })
 
-    // User.find().then(function(user) {
-    // res.render("users",{otherUser:user}); // different key "otherUser" needed here to avoid conflict with header bar reference to current logged in "user"
-
   })
 })
 
@@ -213,6 +210,22 @@ app.get('/snippets/', requireLogin, function(req, res) {
     res.render("many", {
       snippet: snippet
     });
+  })
+})
+
+app.get('/tags/', requireLogin, function(req, res) {
+  Snippet.distinct("tags").then(function(snippet) {
+    res.render("tags", {
+      snippet: snippet
+    })
+  })
+})
+
+app.get('/languages/', requireLogin, function(req, res) {
+  Snippet.distinct("language").then(function(snippet) {
+    res.render("languages", {
+      snippet: snippet
+    })
   })
 })
 
@@ -339,22 +352,6 @@ app.post('/create/', function(req, res) {
       res.redirect('/');
     })
 })
-
-//EDIT DOESN'T WORK YET
-// app.get('/edit/:id', requireLogin, function (req, res) {
-//   Snippet.findOne({_id : req.params.id}).then(function(snippet){
-//     if (req.user.username == snippet.username) {
-//     res.render("edit",{snippet : snippet});
-//     }
-//
-//     else {
-//       res.redirect('/snippets/id/:id', {error:"That is not your snippet"})
-//     }
-//
-//   })
-//
-// })
-
 
 app.listen(3000, function() {
   console.log('Express running on http://localhost:3000/.')
