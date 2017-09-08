@@ -190,7 +190,7 @@ app.get('/tagsbyuser/:username', requireLogin, function(req, res) {
   Snippet.find({
     author: req.params.username
   }).distinct("tags").then(function(snippet) {
-    res.render("tags", {
+    res.render("tagsbyuser", {
       snippet: snippet,
       username: req.params.username
     })
@@ -201,7 +201,7 @@ app.get('/languagesbyuser/:username', requireLogin, function(req, res) {
   Snippet.find({
     author: req.params.username
   }).distinct("language").then(function(snippet) {
-    res.render("languages", {
+    res.render("languagesbyuser", {
       snippet: snippet,
       username: req.params.username
     })
