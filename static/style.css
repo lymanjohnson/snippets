@@ -12,6 +12,10 @@
   text-decoration: inherit;
 }
 
+.bodyText {
+  border: 1px solid lightgray;
+  color: inherit;
+}
 
 .container {
   max-width: 50rem;
