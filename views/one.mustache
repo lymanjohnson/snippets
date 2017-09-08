@@ -33,7 +33,7 @@
           <form action="/delete/" method="POST">
             <button type="submit" name="id" value="{{id}}">DELETE SNIPPET</button>
           </form>
-          <form action="/edit/" method="POST">
+          <form action="/edit/{{id}}" method="GET">
             <button type="submit" name="id" value="{{id}}">EDIT SNIPPET</button>
           </form>
         {{/mine}}

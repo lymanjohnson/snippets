@@ -1,14 +1,32 @@
-EDIT PAGE GOES HERE:
-
+{{#errorMsg}}
+  <div class="alert alert-danger">
+    {{.}}
+  </div>
+{{/errorMsg}}
 {{#snippet}}
+<div class="container">
+  <h2>Edit Snippet</h2>
+  <form action="/confirmedit/" method="POST">
+    <label for="title">Title:</label>
+    <pre><input type="text" id="title" name="title" value="{{title}}" required></input></pre>
 
-  <p>title:{{title}}</p>
-  <p>author:{{author}}</p>
-  <p>language:{{language}}</p>
-  <p>tags:{{tags}}</p>
-  <p>stars:{{stars}}</p>
+    <label for="body">Body:</label>
+    <pre><textarea cols="200" rows="30" id="body" name="body">{{body}}</textarea></pre>
 
+    <label for="notes">Notes:</label>
+    <pre><input type="text" id="notes" name="notes" value="{{notes}}"></input></pre>
+
+    <label for="language">Language:</label>
+    <pre><input type="text" id="language" name="language" value="{{language}}"></input></pre>
+
+    <label for="tagsRaw">Tags:</label>
+    <pre><input type="text" id="tagsRaw" name="tagsRaw" value="{{#tags}}{{.}} {{/tags}}">
+    </input></pre>
+
+    <button type="submit">Edit Snippet</button>
+  </form>
+</div>
 {{/snippet}}
-
-{{^snippet}} No snippet loaded
-{{/snippet}}
+{{^mine}}
+You cannot edit someone else's snippet!
+{{/mine}}

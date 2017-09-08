@@ -299,16 +299,23 @@ app.get('/snippets/id/:id', requireLogin, function(req, res) {
   })
 })
 
+app.get('/edit/:id', requireLogin, function(req, res) {
+  Snippet.findOne({
+    _id: req.params.id
+  }).then(function(snippet) {
+    res.render("edit", {
+      snippet: snippet,
+      mine: (snippet.author == res.locals.user.username)
+    })
+  })
+})
+
 app.post('/delete/', requireLogin, function(req,res) {
   Snippet.remove({
     _id: req.body.id
   }).then(
     res.redirect('/')
   )
-})
-
-app.get('/create/', requireLogin, function(req, res) {
-  res.render("create");
 })
 
 app.post('/star/', requireLogin, function(req, res) {
@@ -338,6 +345,12 @@ app.post('/star/', requireLogin, function(req, res) {
     snippet.save()
     res.redirect(`/snippets/id/${req.body.id}/`)
   })
+})
+
+
+
+app.get('/create/', requireLogin, function(req, res) {
+  res.render("create");
 })
 
 app.post('/create/', function(req, res) {
