@@ -17,5 +17,18 @@
   "scripts": {
     "start": "nodemon -e mustache,js app.js",
     "restart": "mongoimport --db snippetdb --collection snippets --drop --jsonArray --file sample-snippets.json"
+  },
+  "engines": {
+    "node": "v6.10.1",
+    "npm": "5.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0"
+  },
+  "repository": {
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/lymanjohnson/snippets.git"
+    }
   }
 }
