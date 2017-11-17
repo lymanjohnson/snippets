@@ -61,12 +61,12 @@ app.use(session({
   saveUninitialized: false,
   store: new(require('express-sessions'))({
     storage: 'mongodb',
-    // instance: mongoose, // optional
-    // host: 'localhost', // optional
-    // port: 27017, // optional
-    // db: 'test', // optional
-    // collection: 'sessions', // optional
-    // expire: 86400 // optional
+    instance: mongoose, // optional
+    host: 'localhost', // optional
+    port: 27017, // optional
+    db: 'test', // optional
+    collection: 'sessions', // optional
+    expire: 86400 // optional
   })
 }));
 
