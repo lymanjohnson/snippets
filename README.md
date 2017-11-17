@@ -1,4 +1,4 @@
-SNIPPET SORTER
+[SNIPPET SORTER](https://snippetscode.herokuapp.com)
 
 Load sample data by typing "npm restart"
 Start server by typing "npm start"
