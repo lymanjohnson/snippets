@@ -13,7 +13,8 @@ const fs = require('fs'),
   User = models.User,
   Snippet = models.Snippet,
   DUPLICATE_RECORD_ERROR = 11000,
-  app = express();
+  app = express(),
+  port = process.env.PORT;
 
 mongoose.connect('mongodb://localhost/snippetdb');
 
@@ -382,6 +383,10 @@ app.post('/create/', function(req, res) {
     })
 })
 
-app.listen(3000, function() {
-  console.log('Express running on http://localhost:3000/.')
+// app.listen(3000, function() {
+//   console.log('Express running on http://localhost:3000/.')
+// });
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
