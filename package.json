@@ -1,5 +1,4 @@
 {
-  "private": true,
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
@@ -8,6 +7,7 @@
     "express-session": "^1.15.4",
     "express-sessions": "^1.0.6",
     "express-validator": "^3.2.1",
+    "mongo": "^0.1.0",
     "mongoose": "^4.11.4",
     "mustache-express": "^1.2.5",
     "nodemon": "^1.12.0",
@@ -20,15 +20,6 @@
   },
   "engines": {
     "node": "v6.10.1",
-    "npm": "5.3.0"
-  },
-  "devDependencies": {
-    "dotenv": "^4.0.0"
-  },
-  "repository": {
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/lymanjohnson/snippets.git"
-    }
+    "npm": "5.4.0"
   }
 }

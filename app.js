@@ -14,9 +14,10 @@ const fs = require('fs'),
   Snippet = models.Snippet,
   DUPLICATE_RECORD_ERROR = 11000,
   app = express(),
-  port = process.env.PORT;
+  port = process.env.PORT,
+  mongoURL = process.env.MONGODB_URI;
 
-mongoose.connect('mongodb://localhost/snippetdb');
+mongoose.connect(mongoURL, {useMongoClient: true});
 
 app.engine('mustache', mustacheExpress());
 app.set('views', path.join(__dirname, 'views'));
@@ -56,18 +57,9 @@ app.use(bodyParser.urlencoded({
 app.use(expressValidator());
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: "abracadabra",
   resave: false,
   saveUninitialized: false,
-  store: new(require('express-sessions'))({
-    storage: 'mongodb',
-    instance: mongoose, // optional
-    host: 'localhost', // optional
-    port: 27017, // optional
-    db: 'test', // optional
-    collection: 'sessions', // optional
-    expire: 86400 // optional
-  })
 }));
 
 app.use(passport.initialize());
